@@ -3,6 +3,7 @@
 
 # PCROSS1 - Cross Pattern (Act 1)
 
+import sys
 
 def read_line():
     try:
@@ -19,30 +20,21 @@ def read_line():
 # PROGRAM STARTS HERE
 #*********************
 
-maxn = int(read_line())
-s = map(int, read_line().split())[0:maxn]
+maxt = int(read_line())
 
-b = False
-for i in range(0, maxn):
-    b = True
-    tmp = s[0]
-    for j in range(1, i+1):
-        if s[j]>=tmp:
-            b = False
-            break
-        tmp = s[j]
+for t in range(0, maxt):
+    comps = read_line().split(' ')
+    maxr, maxc, sr, sc = int(comps[0]), int(comps[1]), int(comps[2])-1, int(comps[3])-1
 
-    if b==False:
-        continue
+    res = [['.' for r in range(maxr)] for c in range(maxc)]
 
-    for j in range(i+2, maxn):
-        if s[j]<=tmp:
-            b = False
-            break
-        tmp = s[j]
+    for c in range(0, maxc):
+        res[c][sr] = '*'
+    for r in range(0, maxr):
+        res[sc][r] = '*'
 
-    if b==True:
-        break
-
-rs = 'Yes' if b else 'No'
-print rs
+    for r in range(0, maxr):
+        for c in range (0, maxc):
+            sys.stdout.write(res[c][r])
+        sys.stdout.write('\n')
+    sys.stdout.write('\n')
